@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>csswitch — Premium Jekyll Themes & Dev Guides</title>
+  <meta name="description" content="Distinctive Jekyll themes for developer blogs. No Bootstrap. No jQuery. Just sharp, opinionated design — ready to deploy to GitHub Pages.">
+  <meta property="og:title" content="csswitch — Premium Jekyll Themes">
+  <meta property="og:description" content="Distinctive Jekyll themes for developer blogs. No Bootstrap. No jQuery.">
+  <meta property="og:url" content="https://csswitch.github.io">
+  <link rel="canonical" href="https://csswitch.github.io">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0d;
+      --bg2: #141414;
+      --bg3: #1a1a1a;
+      --border: #2a2a2a;
+      --text: #c8c8c8;
+      --muted: #555;
+      --accent: #b06aff;
+      --accent2: #ff6ab0;
+      --green: #00ff88;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+      --font-sans: system-ui, -apple-system, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { color: var(--accent2); }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 32px;
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-brand {
+      font-family: var(--font-mono);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-brand span { color: var(--accent2); }
+
+    .nav-links { display: flex; gap: 24px; font-size: 14px; }
+    .nav-links a { color: var(--muted); }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 100px 32px 80px;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -2px;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 500px;
+      margin: 0 auto 40px;
+    }
+
+    .hero-badges {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: 10px; margin-bottom: 40px;
+    }
+
+    .badge {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      padding: 4px 12px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--muted);
+    }
+
+    .badge.green { border-color: var(--green); color: var(--green); }
+    .badge.purple { border-color: var(--accent); color: var(--accent); }
+
+    .hero-cta { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      transition: opacity 0.15s;
+    }
+
+    .btn:hover { opacity: 0.85; }
+    .btn-primary { background: var(--accent); color: #000; }
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    /* SECTION */
+    section { padding: 80px 32px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(24px, 4vw, 38px);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -1px;
+      margin-bottom: 48px;
+    }
+
+    /* THEME GRID */
+    .themes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .theme-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .theme-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+    .theme-card-preview {
+      height: 160px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Individual theme preview colors */
+    .preview-terminal { background: #0a0a0a; color: #00ff41; }
+    .preview-glass    { background: linear-gradient(135deg, #1a2a4a, #2a1a4a); color: #e0f0ff; }
+    .preview-galaxy   { background: linear-gradient(135deg, #050510, #0a0520); color: #a0c0ff; }
+    .preview-pixel    { background: #1a0a2a; color: #ff00ff; image-rendering: pixelated; }
+    .preview-blueprint{ background: #0a1a2a; color: #4ab0ff; }
+    .preview-neon     { background: #080810; color: #ff2080; }
+    .preview-brutalist{ background: #f0f0e8; color: #000; }
+    .preview-dashboard{ background: #1a1a2a; color: #60d0ff; }
+    .preview-vaporwave{ background: linear-gradient(135deg, #1a0a2a, #0a1a3a); color: #ff80ff; }
+    .preview-manuscript{ background: #f5f0e8; color: #2a1a0a; }
+
+    .preview-label {
+      position: absolute; bottom: 8px; right: 10px;
+      font-size: 10px; opacity: 0.4;
+    }
+
+    .theme-card-body { padding: 18px; }
+
+    .theme-card-name {
+      font-weight: 700; font-size: 16px; color: #fff; margin-bottom: 6px;
+    }
+
+    .theme-card-desc {
+      font-size: 13px; color: var(--muted); margin-bottom: 14px; line-height: 1.5;
+    }
+
+    .theme-card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .theme-price {
+      font-family: var(--font-mono);
+      font-size: 18px; font-weight: 700; color: var(--accent);
+    }
+
+    .theme-status {
+      font-family: var(--font-mono);
+      font-size: 11px; padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .status-available { background: rgba(0,255,136,0.1); color: var(--green); border: 1px solid rgba(0,255,136,0.2); }
+    .status-soon { background: rgba(255,255,255,0.05); color: var(--muted); border: 1px solid var(--border); }
+
+    /* WHY SECTION */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .why-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+    }
+
+    .why-icon { font-size: 24px; margin-bottom: 12px; }
+    .why-title { font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .why-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* PRICING */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .pricing-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 32px;
+    }
+
+    .pricing-card.featured {
+      border-color: var(--accent);
+      background: linear-gradient(135deg, rgba(176,106,255,0.08), var(--bg2));
+    }
+
+    .pricing-badge {
+      font-family: var(--font-mono);
+      font-size: 11px; padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--accent); color: #000;
+      display: inline-block; margin-bottom: 16px;
+    }
+
+    .pricing-name { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .pricing-price {
+      font-family: var(--font-mono);
+      font-size: 40px; font-weight: 800; color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .pricing-note { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+
+    .pricing-features { list-style: none; margin-bottom: 28px; }
+    .pricing-features li {
+      font-size: 14px; color: var(--text);
+      padding: 6px 0; border-bottom: 1px solid var(--border);
+      display: flex; gap: 8px;
+    }
+
+    .pricing-features li:last-child { border-bottom: none; }
+    .pricing-features li::before { content: "✓"; color: var(--green); flex-shrink: 0; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 32px;
+      text-align: center;
+    }
+
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+
+    .footer-brand {
+      font-family: var(--font-mono);
+      font-size: 20px; font-weight: 700;
+      color: var(--accent); margin-bottom: 12px;
+    }
+
+    .footer-brand span { color: var(--accent2); }
+    .footer-links { display: flex; justify-content: center; gap: 24px; font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+    .footer-copy { font-size: 13px; color: #333; font-family: var(--font-mono); }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      nav { padding: 14px 20px; }
+      .nav-links { gap: 16px; }
+      .hero { padding: 60px 20px 60px; }
+      section { padding: 60px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-brand">css<span>witch</span> 🧙‍♀️</div>
+    <div class="nav-links">
+      <a href="#themes">Themes</a>
+      <a href="#why">Why csswitch</a>
+      <a href="#pricing">Pricing</a>
+      <a href="https://github.com/csswitch" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">Jekyll Themes & Dev Guides</p>
+    <h1>Themes devs<br>actually <em>want to use</em></h1>
+    <p class="hero-sub">No Bootstrap. No jQuery. Distinctive aesthetics — ready to deploy to GitHub Pages in minutes.</p>
+    <div class="hero-badges">
+      <span class="badge green">GitHub Pages compatible</span>
+      <span class="badge purple">No jQuery</span>
+      <span class="badge">Vanilla JS</span>
+      <span class="badge">10 themes</span>
+      <span class="badge">MIT licensed</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#themes" class="btn btn-primary">Browse themes</a>
+      <a href="https://github.com/csswitch" class="btn btn-secondary" target="_blank" rel="noopener">View on GitHub</a>
+    </div>
+  </section>
+
+  <!-- THEMES -->
+  <section id="themes" style="background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div class="section-inner">
+      <p class="section-label">Collection</p>
+      <h2 class="section-title">10 distinctive themes</h2>
+      <div class="themes-grid">
+
+        <div class="theme-card">
+          <div class="theme-card-preview preview-terminal">
+            <span>user@blog:~ $ █</span>
+            <span class="preview-label">terminal</span>
+          </div>
+          <div class="theme-card-body">
+            <div class="theme-card-name">Terminal</div>
+            <div class="theme-card-desc">Retro terminal aesthetic. Green phosphor, <code>ls -la</code> post listings, CRT scanlines, boot sequence animation.</div>
+            <div class="theme-card-footer">
+              <span class="theme-price">$49</span>
+              <span class="theme-status status-available">Available now</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-card-preview preview-glass">
+            <span style="padding:12px 20px;background:rgba(255,255,255,0.08);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.15);border-radius:8px;">Glassmorphism</span>
+            <span class="preview-label">glass</span>
+          </div>
+          <div class="theme-card-body">
+            <div class="theme-card-name">Glass</div>
+            <div class="theme-card-desc">Frosted glassmorphism. Blur panels, gradient backgrounds, smooth light/dark toggle.</div>
+            <div class="theme-card-footer">
+              <span class="theme-price">$49</span>
+              <span class="theme-status status-soon">Coming soon</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-card-preview preview-galaxy">
+            <span style="font-size:11px;text-align:center;padding:0 16px">✦ &nbsp; ·&nbsp; ✦ &nbsp;·&nbsp; ✦<br>deep space blog<br>· &nbsp;✦ &nbsp;·&nbsp; ✦ &nbsp;·</span>
+            <span class="preview-label">galaxy</span>
+          </div>
+          <div class="theme-card-body">
+            <div class="theme-card-name">Galaxy</div>
+            <div class="theme-card-desc">Deep space aesthetic. Star field canvas, nebula gradients, constellation nav.</div>
+            <div class="theme-card-footer">
+              <span class="theme-price">$49</span>
+              <span class="theme-status status-soon">Coming soon</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-card-preview preview-pixel">
+            <span style="image-rendering:pixelated;font-size:12px;letter-spacing:2px">█░█ PIXEL░BLOG █░█</span>
+            <span class="preview-label">pixel</span>
+          </div>
+          <div class="theme-card-body">
+            <div class="theme-card-name">Pixel</div>
+            <div class="theme-card-desc">8-bit pixel art aesthetic. Sprite animations, retro game UI, pixel-perfect borders.</div>
+            <div class="theme-card-footer">
+              <span class="theme-price">$49</span>
+              <span class="theme-status status-soon">Coming soon</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-card-preview preview-blueprint">
+            <span style="font-size:11px;border:1px dashed #4ab0ff;padding:8px 14px;opacity:0.8">SECTION A — BLOG LAYOUT</span>
+            <span class="preview-label">blueprint</span>
+          </div>
+          <div class="theme-card-body">
+            <div class="theme-card-name">Blueprint</div>
+            <div class="theme-card-desc">Technical blueprint aesthetic. Grid paper, schematic drawings, engineering annotations.</div>
+            <div class="theme-card-footer">
+              <span class="theme-price">$49</span>
+              <span class="theme-status status-soon">Coming soon</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-card-preview preview-neon">
+            <span style="text-shadow:0 0 10px #ff2080,0 0 30px #ff2080;font-size:15px;letter-spacing:3px">NEON NOIR</span>
+            <span class="preview-label">neon</span>
+          </div>
+          <div class="theme-card-body">
+            <div class="theme-card-name">Neon Noir</div>
+            <div class="theme-card-desc">Cyberpunk neon. Dark city vibes, glowing sign typography, rain effect, moody atmosphere.</div>
+            <div class="theme-card-footer">
+              <span class="theme-price">$49</span>
+              <span class="theme-status status-soon">Coming soon</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-card-preview preview-brutalist">
+            <span style="font-size:20px;font-weight:900;text-transform:uppercase;letter-spacing:-1px;color:#000;border:3px solid #000;padding:6px 12px">BRUTALIST</span>
+            <span class="preview-label" style="color:#000">brutalist</span>
+          </div>
+          <div class="theme-card-body">
+            <div class="theme-card-name">Brutalist</div>
+            <div class="theme-card-desc">Intentional web brutalism. Raw layouts, bold typography, stark contrast — ugly on purpose.</div>
+            <div class="theme-card-footer">
+              <span class="theme-price">$49</span>
+              <span class="theme-status status-soon">Coming soon</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-card-preview preview-dashboard">
+            <span style="font-size:11px;border:1px solid #60d0ff33;padding:6px 10px;color:#60d0ff">▣ DASHBOARD OS v2.0</span>
+            <span class="preview-label">dashboard</span>
+          </div>
+          <div class="theme-card-body">
+            <div class="theme-card-name">Dashboard</div>
+            <div class="theme-card-desc">OS dashboard aesthetic. Window chrome, taskbar, system tray — like blogging from an OS.</div>
+            <div class="theme-card-footer">
+              <span class="theme-price">$49</span>
+              <span class="theme-status status-soon">Coming soon</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-card-preview preview-vaporwave">
+            <span style="font-size:13px;letter-spacing:4px;text-shadow:0 0 10px #ff80ff">Ｖ Ａ Ｐ Ｏ Ｒ</span>
+            <span class="preview-label">vaporwave</span>
+          </div>
+          <div class="theme-card-body">
+            <div class="theme-card-name">Vaporwave</div>
+            <div class="theme-card-desc">90s vaporwave aesthetic. Pastel gradients, retro grids, glitch text effects, nostalgia.</div>
+            <div class="theme-card-footer">
+              <span class="theme-price">$49</span>
+              <span class="theme-status status-soon">Coming soon</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="theme-card">
+          <div class="theme-card-preview preview-manuscript">
+            <span style="font-family:Georgia,serif;font-size:14px;color:#2a1a0a;font-style:italic">A writer's notebook…</span>
+            <span class="preview-label" style="color:#2a1a0a">manuscript</span>
+          </div>
+          <div class="theme-card-body">
+            <div class="theme-card-name">Manuscript</div>
+            <div class="theme-card-desc">Writer's notebook aesthetic. Serif typography, ink texture, reading-optimised layout, calm.</div>
+            <div class="theme-card-footer">
+              <span class="theme-price">$49</span>
+              <span class="theme-status status-soon">Coming soon</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section id="why">
+    <div class="section-inner">
+      <p class="section-label">Why csswitch</p>
+      <h2 class="section-title">Built differently</h2>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">🚫</div>
+          <div class="why-title">No Bootstrap. No jQuery.</div>
+          <div class="why-desc">Every theme is vanilla CSS + vanilla JS. Fast, clean, no dependency nightmares.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">✅</div>
+          <div class="why-title">GitHub Pages native</div>
+          <div class="why-desc">Only whitelisted plugins. Push to GitHub, enable Pages — it just works.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🎨</div>
+          <div class="why-title">Actually distinctive</div>
+          <div class="why-desc">Not another minimal serif blog. Each theme has a strong, deliberate visual identity.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">📖</div>
+          <div class="why-title">Real documentation</div>
+          <div class="why-desc">Every option documented. Config file is self-explanatory. Not just a README.</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">📱</div>
+          <div class="why-title">Thoughtful responsive</div>
+          <div class="why-desc">Mobile layouts adapted per theme aesthetic — not just "squished desktop".</div>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🔍</div>
+          <div class="why-title">SEO ready</div>
+          <div class="why-desc">jekyll-seo-tag, Open Graph, canonical URLs, sitemap — all wired up.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" style="background: var(--bg2); border-top: 1px solid var(--border);">
+    <div class="section-inner">
+      <p class="section-label">Pricing</p>
+      <h2 class="section-title">Simple, fair pricing</h2>
+      <div class="pricing-grid">
+
+        <div class="pricing-card">
+          <div class="pricing-name">Single theme</div>
+          <div class="pricing-price">$49</div>
+          <div class="pricing-note">One theme, use forever</div>
+          <ul class="pricing-features">
+            <li>Full theme source</li>
+            <li>All color schemes</li>
+            <li>MIT license</li>
+            <li>Free updates</li>
+            <li>GitHub Issues support</li>
+          </ul>
+          <a href="#themes" class="btn btn-secondary" style="width:100%;text-align:center;display:block">Choose a theme</a>
+        </div>
+
+        <div class="pricing-card featured">
+          <span class="pricing-badge">Best value</span>
+          <div class="pricing-name">All 10 themes</div>
+          <div class="pricing-price">$149</div>
+          <div class="pricing-note">All themes, all future themes</div>
+          <ul class="pricing-features">
+            <li>All 10 themes</li>
+            <li>All future themes included</li>
+            <li>All color schemes</li>
+            <li>MIT license</li>
+            <li>Free lifetime updates</li>
+            <li>Priority support</li>
+          </ul>
+          <a href="https://gumroad.com" class="btn btn-primary" style="width:100%;text-align:center;display:block" target="_blank" rel="noopener">Buy the bundle — $149</a>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-name">Ebooks & guides</div>
+          <div class="pricing-price">$19+</div>
+          <div class="pricing-note">Deep-dives on Jekyll, CSS, dev tools</div>
+          <ul class="pricing-features">
+            <li>PDF + EPUB formats</li>
+            <li>Code examples included</li>
+            <li>Free updates</li>
+            <li>DRM free</li>
+          </ul>
+          <a href="https://gumroad.com" class="btn btn-secondary" style="width:100%;text-align:center;display:block" target="_blank" rel="noopener">Browse guides</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">css<span>witch</span> 🧙‍♀️</div>
+      <div class="footer-links">
+        <a href="https://github.com/csswitch">GitHub</a>
+        <a href="#themes">Themes</a>
+        <a href="#pricing">Pricing</a>
+      </div>
+      <div class="footer-copy">MIT licensed · built with Jekyll · hosted on GitHub Pages</div>
+    </div>
+  </footer>
+
+</body>
+</html>
